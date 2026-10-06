@@ -1,0 +1,63 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '4.1.1'
+}
+
+group = 'com.todoapp'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // BOM import via Gradle's native platform support, not the io.spring.dependency-management
+    // plugin — that plugin's own docs only list support up to Gradle 8.x, and Spring's own
+    // Initializr team has recommended moving away from it in favor of this native mechanism.
+    implementation platform('org.springframework.boot:spring-boot-dependencies:4.1.1')
+
+    // Web + validation
+    // Renamed in Spring Boot 4: spring-boot-starter-web -> spring-boot-starter-webmvc
+    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Persistence
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // Auth is handled with a hand-rolled session filter + salted-hash
+    // comparison against the DB — see com.todoapp.security. No Spring Security.
+
+    // Email
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+    // Scheduling is part of spring-context, already pulled in transitively
+
+    // Lombok — cuts boilerplate on entities/DTOs (respects DRY/clean-code preference).
+    // Pinned explicitly (not left to the BOM): the platform() import above only propagates
+    // to configurations that extend `implementation`, and compileOnly/annotationProcessor
+    // don't — leaving the version unpinned resolves to nothing and fails the build.
+    // 1.18.46 is current and has confirmed JDK 25 support.
+    compileOnly 'org.projectlombok:lombok:1.18.46'
+    annotationProcessor 'org.projectlombok:lombok:1.18.46'
+
+    // Tests
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
