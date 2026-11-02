@@ -1,0 +1,178 @@
+/* The signed-in task list. Text sizes raised from the old 13-15px range. */
+
+.app-shell {
+  max-width: 50rem;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0 1.5rem 5rem;
+}
+
+/* --- Top bar --- */
+
+.top-bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 2rem 0 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.top-bar h1 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: baseline;
+}
+
+.session-user {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.logout-link {
+  margin-left: 1rem;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.logout-link:hover {
+  color: var(--text);
+}
+
+/* --- Quick add --- */
+
+.quick-add {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.quick-add .input[type='text'] {
+  flex: 1 1 16rem;
+  width: auto;
+}
+
+.quick-add .input[type='datetime-local'] {
+  width: auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+}
+
+/* --- Task list --- */
+
+.task-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.task-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0.25rem 1rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+  border-left: 3px solid transparent;
+}
+
+.task-row.expired {
+  background: var(--danger-tint);
+  border-left-color: var(--danger);
+}
+
+.task-checkbox {
+  flex-shrink: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  background: transparent;
+  border: 2px solid var(--text-muted);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.task-checkbox:hover {
+  border-color: var(--accent);
+}
+
+.task-title {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--fs-md);
+  overflow-wrap: break-word;
+}
+
+.task-deadline {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.task-row.expired .task-title,
+.task-row.expired .task-deadline {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+.task-delete {
+  flex-shrink: 0;
+  padding: 0.4rem;
+  background: none;
+  border: none;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.task-delete:hover {
+  color: var(--danger);
+}
+
+.empty-state {
+  padding: 3rem 0.25rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.empty-state p {
+  margin: 0;
+}
+
+@media (max-width: 560px) {
+  .quick-add .input[type='datetime-local'],
+  .quick-add .btn {
+    flex: 1 1 100%;
+  }
+
+  /* Deadline drops under the title instead of squeezing it. */
+  .task-row {
+    flex-wrap: wrap;
+  }
+
+  .task-title {
+    flex-basis: calc(100% - 6rem);
+  }
+
+  .task-deadline {
+    order: 4;
+    flex-basis: 100%;
+    padding-left: 2.6rem;
+  }
+}

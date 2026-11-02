@@ -1,0 +1,83 @@
+/* Login and signup: the page is split into two equal vertical halves,
+   form on the left and an illustration on the right. */
+
+.auth-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+.auth-split__form {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 3rem;
+}
+
+.auth-split__brand {
+  align-self: flex-start;
+}
+
+.auth-split__body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 28rem;
+}
+
+.auth-card h1 {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-serif);
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.auth-subtitle {
+  margin: 0 0 2rem;
+  font-size: var(--fs-md);
+  color: var(--text-muted);
+}
+
+.auth-switch {
+  margin: 1.5rem 0 0;
+  color: var(--text-muted);
+}
+
+/* Stays put while the form side scrolls (e.g. on a short window with an
+   error message showing). Fallback colour is drawn from the image itself. */
+.auth-split__visual {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  overflow: hidden;
+  background: #ecdcc6;
+}
+
+.auth-split__visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+@media (max-width: 860px) {
+  .auth-split {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-split__visual {
+    display: none;
+  }
+
+  .auth-split__form {
+    padding: 1.5rem;
+  }
+}

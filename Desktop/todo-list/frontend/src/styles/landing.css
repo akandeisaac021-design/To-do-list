@@ -1,0 +1,157 @@
+/* Landing page: navbar, introduction, review form. */
+
+/* --- Navbar --- */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar__inner {
+  max-width: 75rem;
+  height: 4.5rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navbar__anchor {
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.navbar__anchor:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.navbar .btn {
+  padding: 0.55rem 1.1rem;
+}
+
+/* --- Introduction --- */
+
+.hero {
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 4rem 2rem 5rem;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero h1 {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-serif);
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.hero__lede {
+  max-width: 34rem;
+  margin: 0 0 2rem;
+  font-size: var(--fs-md);
+  color: var(--text-muted);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.hero__visual {
+  overflow: hidden;
+  border-radius: 1.25rem;
+  background: #d9cdea;
+  box-shadow: 0 24px 48px -16px rgba(33, 29, 26, 0.35);
+}
+
+.hero__visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* --- Reviews --- */
+
+.reviews {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  /* Keeps the heading clear of the sticky navbar when jumped to. */
+  scroll-margin-top: 4.5rem;
+}
+
+.reviews__inner {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.5rem 5.5rem;
+}
+
+.reviews h2 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-serif);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.reviews__intro {
+  margin: 0 0 2rem;
+  font-size: var(--fs-md);
+  color: var(--text-muted);
+}
+
+/* Bot trap: off-screen rather than display:none, since some bots skip
+   fields that are display:none. Real visitors never see or reach it. */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 2.5rem 1.25rem 3.5rem;
+  }
+
+  .hero__visual {
+    max-width: 28rem;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar__inner {
+    padding: 0 1rem;
+  }
+
+  .navbar__links {
+    gap: 0.75rem;
+  }
+
+  /* The hero and review form are one scroll apart on a phone. */
+  .navbar__anchor {
+    display: none;
+  }
+}
